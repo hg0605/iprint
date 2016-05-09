@@ -1,4 +1,5 @@
-
+import sys
+sys.path.append("/home/ubuntu/iprint")
 
 from flask import Flask, render_template, request, session, jsonify
 import json
