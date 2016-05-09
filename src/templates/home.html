@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">iPrint</a>
+    </div>
+    <ul class="nav navbar-nav" style="margin-left: 36px;">
+      <li class="active"><a href="#">Home</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="jumbotron" style="padding-bottom: 260px;">
+    <h1 style="font-family: 'Monotype Corsavia';text-align:center;font-size: 108px;"><i><span style="color: red">i</span>Print</i></h1>
+<br><br>
+      <h2 style="text-align:center;">Welcome to the online printing portal</h2>
+
+  </div>
+
+</div>
+{% endblock %}

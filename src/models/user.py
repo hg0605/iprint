@@ -9,10 +9,11 @@ from src.models.blog import Blog
 
 class User(object):
 
-    def __init__(self,email,password,_id=None):
+    def __init__(self,email,password,_id=None,printdata="no"):
         self.email=email
         self.password=password
         self._id=uuid.uuid4().hex if _id is None else _id
+        self.printdata=printdata
 
     @classmethod
     def get_by_email(cls,email):
@@ -76,7 +77,8 @@ class User(object):
 
         blog.new_post(title=title,
                       content=content,
-                      date=date)
+                      date=date
+                   )
 
 
 
@@ -86,7 +88,8 @@ class User(object):
         return {
             "email":self.email,
             "_id":self._id,
-            "password":self.password
+            "printdata":self.printdata,
+        "password":self.password
         }
 
     def save_to_mongo(self):

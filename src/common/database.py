@@ -22,3 +22,7 @@ class Database(object):
     @staticmethod
     def find_one(collection, query):
         return Database.DATABASE[collection].find_one(query)
+
+    @staticmethod
+    def update(collection,query1,query2):
+        return Database.DATABASE[collection].update(query1,{"$set":query2})
