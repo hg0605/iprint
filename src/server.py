@@ -9,13 +9,14 @@ s.listen(5)                     # Now wait for client connection.
 
 print 'Server listening....'
 filename=argv[1]
+filename1=argv[2]
 
 
 conn, addr = s.accept()     # Establish connection with client.
 print 'Got connection from', addr
 data = conn.recv(1024)
 print('Server received', repr(data))
-
+conn.send(filename1)
     
 f = open(filename,'rb')
 l = f.read(1024)

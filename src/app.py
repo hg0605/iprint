@@ -1,5 +1,4 @@
-import sys
-sys.path.append("/home/ubuntu/iprint")
+
 
 from flask import Flask, render_template, request, session, jsonify
 import json
@@ -42,7 +41,7 @@ def test_method():
     print (user.json())
     k=user.json()
     k['_id']=str(k['_id'])
-    return k['printdata']
+    return jsonify({"status":k['printdata']})
 
 @app.route('/testerupdate',methods=['POST'])
 def tester_method():
@@ -64,9 +63,17 @@ def login_user():
     else:
         session['email']=None
         print('Wrong Details')
+        return render_template("login.html",email=session['email'])
 
+    return render_template("choice.html",email=session['email'])
 
-    return render_template("uploadfile.html",email=session['email'])
+@app.route('/uploadfile')
+def file_method():
+    return render_template('uploadfile.html')
+
+@app.route('/uploadfileemail')
+def fileemail_method():
+    return render_template('uploadfileemail.html')
 
 @app.route('/auth/loginapp',methods=['POST'])
 def login_userapp():
@@ -105,11 +112,37 @@ def upload_file():
         str="server.py"
         str1="uploads/"+f.filename
         print(str1)
-        Popen(["nohup","python",str,str1])
+        Popen(["nohup","python",str,str1,f.filename])
 
     return render_template("home.html")
 
+@app.route('/uploademail', methods=['GET', 'POST'])
+def uploader_file():
+    if request.method == 'POST':
+        f = request.files['image']
+        email=request.form['email']
+        f.save('uploads/' + secure_filename(f.filename))
+        Database.update("users",{"email":email},{"printdata":"yes"})
+        str="server.py"
+        str1="uploads/"+f.filename
+        print(str1)
+        Popen(["nohup","python",str,str1])
 
+    return jsonify({"status":"success"})
+
+@app.route('/uploademailfile', methods=['GET', 'POST'])
+def uploader1_file():
+    if request.method == 'POST':
+        f = request.files['image']
+        email=request.form['email']
+        f.save('uploads/' + secure_filename(f.filename))
+        Database.update("users",{"email":email},{"printdata":"yes"})
+        str="server.py"
+        str1="uploads/"+f.filename
+        print(str1)
+        Popen(["nohup","python",str,str1])
+
+    return render_template("home.html")
 
 
 @app.route('/blogs/<string:user_id>')
