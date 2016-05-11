@@ -128,7 +128,7 @@ def uploader_file():
         str="server.py"
         str1="uploads/"+f.filename
         print(str1)
-        Popen(["nohup","python",str,str1])
+        Popen(["nohup","python",str,str1,f.filename])
 
     return jsonify({"status":"success"})
 
@@ -142,7 +142,7 @@ def uploader1_file():
         str="server.py"
         str1="uploads/"+f.filename
         print(str1)
-        Popen(["nohup","python",str,str1])
+        Popen(["nohup","python",str,str1,f.filename])
 
     return render_template("home.html")
 
